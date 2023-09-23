@@ -1,0 +1,154 @@
+.loader {
+    .loaderLogo {
+        width: 660px;
+    }
+
+    .content {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background-image: url("../../assets/imgs/loading-back.png");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .image-wrapper {
+        position: relative;
+        transform: translate3d(-50%, -50%, 0);
+        top: 50%;
+        left: 50%;
+        width: fit-content;
+    }
+
+    .players {
+        width: 600px;
+        max-width: 95%;
+    }
+
+    .shine {
+        overflow: hidden;
+        &::before {
+            background: linear-gradient(
+                to right,
+                fade_out(#000, 0.7) 0%,
+                fade_out(#000, 0.7) 100%
+            );
+            background-size: 0%, 100%;
+            background-repeat: no-repeat;
+            background-position-x: right;
+            content: "";
+            display: block;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+            mask-image: url("../../assets/imgs/logo.png");
+            mask-size: 100% 100%;
+            animation: shine 3s;
+        }
+        @keyframes shine {
+            0% {
+                background-size: 100%, 100%;
+            }
+            100% {
+                background-size: 0%, 100%;
+            }
+        }
+    }
+
+    .progress-container {
+        position: relative;
+        margin-top: 50px;
+        opacity: 1;
+        transition: all 0.5s;
+
+        width: 100%;
+        aspect-ratio: 1770/111;
+        background-image: url("../../assets/imgs/loader-slider.png");
+        background-size: contain;
+
+        &.hide {
+            opacity: 0;
+        }
+
+        .progress {
+            -webkit-mask-image: url("../../assets/imgs/loader-slider-mask.png");
+            -webkit-mask-size: contain;
+            mask-image: url("../../assets/imgs/loader-slider-mask.png");
+            mask-size: contain;
+            background: linear-gradient(to top, #a94c00, #ffdf2e);
+            background-repeat: no-repeat;
+            transition: all 0.5s;
+        }
+        img {
+            position: absolute;
+            height: 150%;
+            aspect-ratio: 145/178;
+            top: 0;
+            transform: translate(-50%, -25%);
+
+            transition: all 0.5s;
+        }
+    }
+
+    .pressAnyKey {
+        position: absolute;
+        bottom: 30px;
+        transform: translateX(-50%);
+        left: 50%;
+        opacity: 0;
+        transition: all 1s;
+        color: white;
+        font-size: 30px;
+        font-weight: 900;
+
+        &.active {
+            opacity: 1;
+            animation: pressKeyAnim 1s infinite;
+            animation-delay: 1s;
+        }
+    }
+
+    &.enterGame {
+        animation: fadeOut 2s forwards;
+        animation-delay: 1s;
+
+        .pressAnyKey {
+            animation: pressKeyAnimFast 0.1s 10;
+        }
+    }
+
+    @keyframes pressKeyAnim {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.3;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes pressKeyAnimFast {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.3;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+}

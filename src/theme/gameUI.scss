@@ -1,0 +1,114 @@
+.healthBar {
+    background: #000000;
+    position: relative;
+
+    &__progress {
+        background: #096d08;
+        position: absolute;
+        box-shadow: inset 0.05em 0.05em 0.05em 0 rgba(255, 255, 255, 0.5),
+            inset -0.05em -0.05em 0.05em 0 rgba(0, 0, 0, 0.5);
+    }
+}
+
+.towerStatusBar {
+    position: relative;
+    z-index: 20;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 2px;
+    background: rgb(201, 160, 48);
+    box-shadow: inset 0.05em 0.05em 0.05em 0 rgba(255, 255, 255, 0.5),
+        inset -0.05em -0.05em 0.05em 0 rgba(0, 0, 0, 0.5);
+
+    &.flex {
+        display: flex;
+    }
+
+    .level {
+        position: relative;
+        color: white;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        background: rgb(42, 44, 45);
+        border: 1px solid #000;
+        padding: 0 5px;
+        height: 15px;
+    }
+}
+
+.textSprite {
+    font-weight: 700;
+    position: relative;
+    animation: 3s fadeOut forwards;
+    text-shadow: 2px 2px #1f1f1f;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.fc-orange {
+    color: #e9e502;
+}
+
+.fs-lg {
+    font-size: 17.4px;
+}
+.fs-md {
+    font-size: 14.3px;
+}
+.fs-sm {
+    font-size: 12.3px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .fs-lg {
+        font-size: 1.7vw;
+    }
+    .fs-md {
+        font-size: 1.4vw;
+    }
+    .fs-sm {
+        font-size: 1.2vw;
+    }
+}
+
+.ff-round {
+    font-family: "Arial Rounded MT Bold";
+}
+
+.ff-micro {
+    font-family: "Microsoft Tai Le";
+}
+// background: linear-gradient(0deg, rgba(229,110,22,1) 0%, rgba(233,229,2,1) 39%);
+
+.gradient-text1 {
+    background-image: linear-gradient(
+        0deg,
+        rgba(229, 110, 22, 1) 0%,
+        rgba(233, 229, 2, 1) 60%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.imageButton {
+    transition: all 0.2s;
+    filter: contrast(1);
+
+    &:hover {
+        filter: contrast(1.3);
+    }
+}
