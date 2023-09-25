@@ -19,10 +19,12 @@ export const FOREST_RADIUS = 35;
 
 export const GAME_STATES = {
     GAME_MENU: 0x01,
-    PLAYING: 0x02,
-    PAUSE: 0x03,
+    SINGLE_PAUSE: 0x02,
+    MULTI_PAUSE: 0x03,
     END: 0x04,
     SETTING: 0x05,
+    SINGLE_PLAYING: 0x06,
+    MULTI_PLAYING: 0x07,
 };
 
 export const CAMERA_POS = {

@@ -14,7 +14,7 @@ export const GradientText = styled.span`
     -webkit-text-fill-color: transparent;
 `;
 
-interface GamePlayUIProps {
+interface GameMultiPlayUIProps {
     gameRef: {
         current: Game;
     };
@@ -22,10 +22,10 @@ interface GamePlayUIProps {
     setUpgrades: any;
 }
 
-const GamePlayUI = ({ gameRef, upgrades, setUpgrades }: GamePlayUIProps) => {
+const GameMultiPlayUI = ({ gameRef, upgrades, setUpgrades }: GameMultiPlayUIProps) => {
     const [profileSpells, setProfilSpells] = useState([]) as any;
 
-    const [playerShow, setPlayerShow]: [boolean, any] = useState(false);
+    const [playerShow, setPlayerShow]: [boolean, any] = useState(true);
 
     const [players, setPlayers]: [PlayerData[], any] = useState([
         {
@@ -33,6 +33,76 @@ const GamePlayUI = ({ gameRef, upgrades, setUpgrades }: GamePlayUIProps) => {
             avata: "/assets/users/jack.png",
             color: "red",
             level: 80,
+            kills: 5,
+            income: 2,
+            wins: 0,
+            lastStands: 0,
+        },
+        {
+            name: "Player2",
+            avata: "/assets/users/2.png",
+            color: "blue",
+            level: 90,
+            kills: 5,
+            income: 2,
+            wins: 0,
+            lastStands: 0,
+        },
+        {
+            name: "Player3",
+            avata: "/assets/users/3.png",
+            color: "pink",
+            level: 60,
+            kills: 5,
+            income: 2,
+            wins: 0,
+            lastStands: 0,
+        },
+        {
+            name: "Player4",
+            avata: "/assets/users/3.png",
+            color: "#eed52d",
+            level: 60,
+            kills: 5,
+            income: 2,
+            wins: 0,
+            lastStands: 0,
+        },
+        {
+            name: "Player5",
+            avata: "/assets/users/3.png",
+            color: "#ea7711",
+            level: 60,
+            kills: 5,
+            income: 2,
+            wins: 0,
+            lastStands: 0,
+        },
+        {
+            name: "Player6",
+            avata: "/assets/users/3.png",
+            color: "#68ee2d",
+            level: 60,
+            kills: 5,
+            income: 2,
+            wins: 0,
+            lastStands: 0,
+        },
+        {
+            name: "Player7",
+            avata: "/assets/users/3.png",
+            color: "#ac2dee",
+            level: 60,
+            kills: 5,
+            income: 2,
+            wins: 0,
+            lastStands: 0,
+        },
+        {
+            name: "Player8",
+            avata: "/assets/users/3.png",
+            color: "#ee632d",
+            level: 60,
             kills: 5,
             income: 2,
             wins: 0,
@@ -128,4 +198,4 @@ const GamePlayUI = ({ gameRef, upgrades, setUpgrades }: GamePlayUIProps) => {
         </>
     );
 };
-export default GamePlayUI;
+export default GameMultiPlayUI;

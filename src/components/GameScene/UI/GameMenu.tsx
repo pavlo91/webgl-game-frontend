@@ -50,7 +50,7 @@ const GameMenu = styled.div`
         display: flex;
         flex-direction: column;
 
-        gap: 57.6px;
+        gap: 15.6px;
         margin-top: 192px;
     }
     .warButton {
@@ -66,8 +66,11 @@ const GameMenu = styled.div`
         font-weight: 900;
         user-select: none;
 
-        &.menuPlay {
+        &.menuSinglePlay {
             background-image: url("/assets/images/menuBtns/play.png");
+        }
+        &.menuMultiPlay {
+            background-image: url("/assets/images/menuBtns/multi_play.png");
         }
 
         &.menuSetting {
@@ -82,7 +85,7 @@ const GameMenu = styled.div`
 
 interface GameMenuUIProps {
     setGameState: (state: number) => void;
-    startGameAction: () => void;
+    startGameAction: (flag ?: boolean) => void;
 }
 
 const GameMenuUI = ({ setGameState, startGameAction }: GameMenuUIProps) => {
@@ -113,7 +116,7 @@ const GameMenuUI = ({ setGameState, startGameAction }: GameMenuUIProps) => {
         };
     }, []);
 
-    const gamePlay = () => {
+    const gamePlay = (flag?: boolean) => {
         setActive(false);
 
         menuDownAnim.reverse();
@@ -126,7 +129,7 @@ const GameMenuUI = ({ setGameState, startGameAction }: GameMenuUIProps) => {
         }
 
         gsap.delayedCall(2, () => {
-            startGameAction();
+            startGameAction(flag);
         });
     };
 
@@ -140,9 +143,14 @@ const GameMenuUI = ({ setGameState, startGameAction }: GameMenuUIProps) => {
             <div className="menu relative top-[-50vh] translate-y-[-50%]">
                 <div className="button-col">
                     <button
-                        className="warButton imageButton menuPlay"
-                        name="play"
-                        onClick={gamePlay}
+                        className="warButton imageButton menuSinglePlay"
+                        name="single_play"
+                        onClick={() => gamePlay(false)}
+                    />
+                    <button
+                        className="warButton imageButton menuMultiPlay"
+                        name="multi_play"
+                        onClick={() => gamePlay(true)}
                     />
                     <button
                         className="warButton imageButton menuSetting"

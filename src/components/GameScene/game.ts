@@ -102,7 +102,19 @@ export class Game {
 
         requestAnimationFrame(this.animate.bind(this));
 
-        if (this._stateManager.getCurrentState() === GAME_STATES["PLAYING"]) {
+        if (this._stateManager.getCurrentState() === GAME_STATES["SINGLE_PLAYING"]) {
+            this._towerManager.tick();
+
+            this._botManager.tick();
+
+            this._spriteManager.tick();
+
+            this._particleEffect.tick();
+
+            this._collisionManager.tick();
+
+            this._timeManager.tick();
+        } else if (this._stateManager.getCurrentState() === GAME_STATES["MULTI_PLAYING"]) {
             this._towerManager.tick();
 
             this._botManager.tick();

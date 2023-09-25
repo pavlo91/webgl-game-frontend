@@ -104,7 +104,7 @@ export const GamePauseUI = ({ setGameState }: any) => {
             delay: 1,
         });
         gsap.delayedCall(2, () => {
-            setGameState(GAME_STATES.PLAYING);
+            setGameState(GAME_STATES.SINGLE_PLAYING);
         });
     };
 

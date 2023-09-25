@@ -6,6 +6,7 @@ import AssetsManager from "./AssetsManager";
 import { GAME_STATES } from "../../constants";
 import GameMenuUI from "./UI/GameMenu";
 import GamePlayUI from "./UI/GamePlay/GamePlay";
+import GameMultiPlayUI from "./UI/GamePlay/GameMultiPlay";
 import GameEndUI from "./UI/GameEnd";
 import GamePauseUI from "./UI/GamePause";
 
@@ -50,17 +51,19 @@ export const GameScene = () => {
         setCanEnterGame(true);
     }, []);
 
-    const startGame = () => {
+    const startGame = (flag ?: boolean) => {
         if (gameRef.current) return;
-
         gameRef.current = new Game({
             canvas: canvasDivRef.current!,
             assetsManager: assetsManagerRef.current,
             setCurrentGameSate: setCurrentGameSate,
             setUpgrades: setUpgrades,
         });
-
-        setGameState(GAME_STATES.PLAYING);
+        if(flag){
+            setGameState(GAME_STATES.MULTI_PLAYING);
+        } else {
+            setGameState(GAME_STATES.SINGLE_PLAYING);
+        }
     };
 
     if (isMobile && window.matchMedia("(orientation: portrait)").matches) {
@@ -124,10 +127,15 @@ export const GameScene = () => {
         }
 
         if (e.key === "Pause") {
-            if (currentGameState === GAME_STATES.PAUSE) {
-                gameRef.current._stateManager.setState(GAME_STATES.PLAYING);
-            } else if (currentGameState === GAME_STATES.PLAYING) {
-                gameRef.current._stateManager.setState(GAME_STATES.PAUSE);
+            if (currentGameState === GAME_STATES.SINGLE_PAUSE) {
+                gameRef.current._stateManager.setState(GAME_STATES.SINGLE_PLAYING);
+            } else if (currentGameState === GAME_STATES.MULTI_PAUSE) {
+                gameRef.current._stateManager.setState(GAME_STATES.MULTI_PLAYING);
+            } 
+            else if (currentGameState === GAME_STATES.SINGLE_PLAYING) {
+                gameRef.current._stateManager.setState(GAME_STATES.SINGLE_PAUSE);
+            } else if (currentGameState === GAME_STATES.MULTI_PLAYING) {
+                gameRef.current._stateManager.setState(GAME_STATES.MULTI_PAUSE);
             }
         }
     };
@@ -161,7 +169,7 @@ export const GameScene = () => {
                 />
             ) : currentGameState === GAME_STATES.SETTING ? (
                 <GameSettingUI setGameState={setGameState} />
-            ) : currentGameState === GAME_STATES["PLAYING"] ? (
+            ) : currentGameState === GAME_STATES["SINGLE_PLAYING"] ? (
                 <>
                     <GamePlayUI
                         gameRef={gameRef}
@@ -172,12 +180,28 @@ export const GameScene = () => {
                     {/* <div className="absolute top-2 right-16">
                         <Toggle
                             title={"Show Grid"}
-                            checked={showGrid}  \
+                            checked={showGrid} 
                             onChange={onToggleGrid}
                         />
                     </div> */}
                 </>
-            ) : currentGameState === GAME_STATES["PAUSE"] ? (
+            ) : currentGameState === GAME_STATES["MULTI_PLAYING"] ? (
+                <>
+                    <GameMultiPlayUI
+                        gameRef={gameRef}
+                        upgrades={upgrades}
+                        setUpgrades={setUpgrades}
+                    />
+
+                    {/* <div className="absolute top-2 right-16">
+                        <Toggle
+                            title={"Show Grid"}
+                            checked={showGrid} 
+                            onChange={onToggleGrid}
+                        />
+                    </div> */}
+                </>
+            ) : currentGameState === GAME_STATES["SINGLE_PAUSE"] ? (
                 <GamePauseUI setGameState={setGameState} />
             ) : currentGameState === GAME_STATES["END"] ? (
                 <GameEndUI
