@@ -51,20 +51,79 @@ export const GameScene = () => {
         setCanEnterGame(true);
     }, []);
 
-    const startGame = (flag ?: boolean) => {
-        if (gameRef.current) return;
+    const startGame = (flag ?: boolean, player_count : number = 3) => {
+        if(flag){
+            playMultiGame(player_count);
+        } else {
+            playSingleGame();
+        }
+    };
+
+    const playSingleGame = () => {
+        if(gameRef.current) return;
         gameRef.current = new Game({
             canvas: canvasDivRef.current!,
             assetsManager: assetsManagerRef.current,
             setCurrentGameSate: setCurrentGameSate,
             setUpgrades: setUpgrades,
+            players: [
+                {
+                    name: "Player1",
+                    avata: "/assets/users/jack.png",
+                    color: "red",
+                    level: 80,
+                    kills: 5,
+                    income: 2,
+                    wins: 0,
+                    lastStands: 0,
+                }
+            ]
         });
-        if(flag){
-            setGameState(GAME_STATES.MULTI_PLAYING);
-        } else {
-            setGameState(GAME_STATES.SINGLE_PLAYING);
-        }
-    };
+        setGameState(GAME_STATES.SINGLE_PLAYING);
+    }
+
+    const playMultiGame = (count : number) => {
+        if (Array.isArray(gameRef.current) && gameRef.current.length > 0 ) return;
+        gameRef.current = new Game({
+            canvas: canvasDivRef.current!,
+            assetsManager: assetsManagerRef.current,
+            setCurrentGameSate: setCurrentGameSate,
+            setUpgrades: setUpgrades,
+            players: [
+                {
+                    name: "Player1",
+                    avata: "/assets/users/jack.png",
+                    color: "red",
+                    level: 80,
+                    kills: 5,
+                    income: 2,
+                    wins: 0,
+                    lastStands: 0,
+                },
+                {
+                    name: "Player2",
+                    avata: "/assets/users/2.png",
+                    color: "blue",
+                    level: 90,
+                    kills: 5,
+                    income: 2,
+                    wins: 0,
+                    lastStands: 0,
+                },
+                {
+                    name: "Player3",
+                    avata: "/assets/users/3.png",
+                    color: "pink",
+                    level: 60,
+                    kills: 5,
+                    income: 2,
+                    wins: 0,
+                    lastStands: 0,
+                },
+            ]
+        });
+        setGameState(GAME_STATES.MULTI_PLAYING);
+    }
 
     if (isMobile && window.matchMedia("(orientation: portrait)").matches) {
         // alert("change the oriented mode to landscape");

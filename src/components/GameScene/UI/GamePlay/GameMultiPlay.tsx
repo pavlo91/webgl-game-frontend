@@ -16,7 +16,7 @@ export const GradientText = styled.span`
 
 interface GameMultiPlayUIProps {
     gameRef: {
-        current: Game;
+        current: Game[];
     };
     upgrades: any;
     setUpgrades: any;
@@ -29,7 +29,8 @@ const GameMultiPlayUI = ({ gameRef, upgrades, setUpgrades }: GameMultiPlayUIProp
 
     const [players, setPlayers]: [PlayerData[], any] = useState([
         {
-            name: "Jack#2643",
+            name: "Player1",
+            room_id: "3",
             avata: "/assets/users/jack.png",
             color: "red",
             level: 80,
@@ -40,6 +41,7 @@ const GameMultiPlayUI = ({ gameRef, upgrades, setUpgrades }: GameMultiPlayUIProp
         },
         {
             name: "Player2",
+            room_id: "3",
             avata: "/assets/users/2.png",
             color: "blue",
             level: 90,
@@ -50,6 +52,7 @@ const GameMultiPlayUI = ({ gameRef, upgrades, setUpgrades }: GameMultiPlayUIProp
         },
         {
             name: "Player3",
+            room_id: "3",
             avata: "/assets/users/3.png",
             color: "pink",
             level: 60,
@@ -58,66 +61,16 @@ const GameMultiPlayUI = ({ gameRef, upgrades, setUpgrades }: GameMultiPlayUIProp
             wins: 0,
             lastStands: 0,
         },
-        {
-            name: "Player4",
-            avata: "/assets/users/3.png",
-            color: "#eed52d",
-            level: 60,
-            kills: 5,
-            income: 2,
-            wins: 0,
-            lastStands: 0,
-        },
-        {
-            name: "Player5",
-            avata: "/assets/users/3.png",
-            color: "#ea7711",
-            level: 60,
-            kills: 5,
-            income: 2,
-            wins: 0,
-            lastStands: 0,
-        },
-        {
-            name: "Player6",
-            avata: "/assets/users/3.png",
-            color: "#68ee2d",
-            level: 60,
-            kills: 5,
-            income: 2,
-            wins: 0,
-            lastStands: 0,
-        },
-        {
-            name: "Player7",
-            avata: "/assets/users/3.png",
-            color: "#ac2dee",
-            level: 60,
-            kills: 5,
-            income: 2,
-            wins: 0,
-            lastStands: 0,
-        },
-        {
-            name: "Player8",
-            avata: "/assets/users/3.png",
-            color: "#ee632d",
-            level: 60,
-            kills: 5,
-            income: 2,
-            wins: 0,
-            lastStands: 0,
-        },
     ]);
 
-    const onClickUpgrade = (item: any, index: number) => {
-        const gold_balance = gameRef.current._playerState.gold;
+    const onClickUpgrade = (item: any, index: number, player_id : any) => {
+        const gold_balance = gameRef.current[player_id]._playerState.gold;
 
         const price = item.cost;
 
         if (gold_balance < price) return;
 
-        gameRef.current._playerState.upgradeSpell(item);
+        gameRef.current[player_id]._playerState.upgradeSpell(item);
 
         if (item.spellType === "Weapon") {
             const userSpells = [...profileSpells];
@@ -143,10 +96,10 @@ const GameMultiPlayUI = ({ gameRef, upgrades, setUpgrades }: GameMultiPlayUIProp
             item.name === `Philosopher's Stone` ||
             item.name === "Cursed Treasure"
         ) {
-            gameRef.current._towerManager.sacrificeHealth(
+            gameRef.current[player_id]._towerManager.sacrificeHealth(
                 ((SPELLS_INFO as any)[item.propertyName] as any).sacrifiHealth
             );
-            gameRef.current._playerState.increaseUpgradeGold(item);
+            gameRef.current[player_id]._playerState.increaseUpgradeGold(item);
         }
 
         const newUpgrades = [...upgrades];

@@ -11,6 +11,7 @@ import { StateManager } from "./States/StateManager";
 import { GAME_STATES } from "../../constants";
 import { AnimationManager } from "./AnimationManager";
 import { PlayerState } from "./States/PlayerState";
+import { PlayerData } from "../../constants/gameUI";
 import { TimeManager } from "./TimeManager";
 
 interface GameOptions {
@@ -18,6 +19,7 @@ interface GameOptions {
     assetsManager: AssetsManager;
     setCurrentGameSate: Function;
     setUpgrades: Function;
+    players: PlayerData[]
 }
 
 export class Game {
@@ -34,6 +36,7 @@ export class Game {
     _animationsManager: AnimationManager;
     _playerState: PlayerState;
     _timeManager: TimeManager;
+    _players: PlayerData[];
 
     constructor(options: GameOptions) {
         this._playerState = new PlayerState();
@@ -83,7 +86,7 @@ export class Game {
             spriteManager: this._spriteManager,
             setUpgrades: options.setUpgrades,
         });
-
+        this._players = options.players;
         this._canvasDiv = options.canvas;
         this.initialize();
     }
