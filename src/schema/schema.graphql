@@ -1,0 +1,14 @@
+query rooms {
+  rooms {
+    id
+    ownerId
+    name
+    capacity
+  }
+}
+
+mutation createRoom($input: CreateRoomInput!) {
+  createRoom(input: $input) {
+    id
+  }
+}

@@ -7,6 +7,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fireworks-js/react": "^2.10.7",
+    "@graphql-codegen/cli": "^5.0.0",
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.9",
     "@testing-library/jest-dom": "^5.16.4",
@@ -43,6 +44,7 @@
     "three.quarks": "^0.10.2",
     "tsparticles": "^2.9.3",
     "typescript": "^4.7.4",
+    "zod": "^3.22.2",
     "zustand": "^4.0.0-rc.1"
   },
   "scripts": {
