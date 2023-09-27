@@ -13,6 +13,8 @@ import GamePauseUI from "./UI/GamePause";
 import { isMobile } from "react-device-detect";
 import { generateUpgrades } from "../../helper/game";
 import GameSettingUI from "./UI/GameSetting";
+import RoomUI from "./UI/Room";
+import PlayerUI from "./UI/Player";
 
 const Wrapper = styled.div`
     position: relative;
@@ -53,7 +55,7 @@ export const GameScene = () => {
 
     const startGame = (flag ?: boolean, player_count : number = 3) => {
         if(flag){
-            playMultiGame(player_count);
+            setGameState(GAME_STATES.MULTI_PLAYING);
         } else {
             playSingleGame();
         }
@@ -246,19 +248,11 @@ export const GameScene = () => {
                 </>
             ) : currentGameState === GAME_STATES["MULTI_PLAYING"] ? (
                 <>
-                    <GameMultiPlayUI
-                        gameRef={gameRef}
-                        upgrades={upgrades}
-                        setUpgrades={setUpgrades}
-                    />
-
-                    {/* <div className="absolute top-2 right-16">
-                        <Toggle
-                            title={"Show Grid"}
-                            checked={showGrid} 
-                            onChange={onToggleGrid}
-                        />
-                    </div> */}
+                    <RoomUI ownerId="ski312" setGameState={setGameState} />
+                </>
+            ) : currentGameState === GAME_STATES["PLAYERS"] ? (
+                <>
+                    <PlayerUI setGameState={setGameState} />
                 </>
             ) : currentGameState === GAME_STATES["SINGLE_PAUSE"] ? (
                 <GamePauseUI setGameState={setGameState} />

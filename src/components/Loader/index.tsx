@@ -99,7 +99,7 @@ const LoadingProgress = styled.div`
     width: 800px;
     bottom: 20px;
 `;
-const PlayerScrollDiv = styled.div`
+ const PlayerScrollDiv = styled.div`
     height: calc(100vh - 387px);
     .scroll {
         overflow-y: scroll;

@@ -25,6 +25,7 @@ export const GAME_STATES = {
     SETTING: 0x05,
     SINGLE_PLAYING: 0x06,
     MULTI_PLAYING: 0x07,
+    PLAYERS: 0x08,
 };
 
 export const CAMERA_POS = {
